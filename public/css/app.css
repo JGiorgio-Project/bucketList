@@ -10,6 +10,11 @@ body{
     font-family: Big Shoulders Display, sans-serif;
 }
 
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+
 h1{
     margin: 0;
 }
@@ -72,4 +77,13 @@ a, a:visited{
 
 a:hover{
     color: #5eb5e0;
+}
+
+footer{
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    background-color: #999999;
+    color: #151515;
+    text-align: center;
 }
