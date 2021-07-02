@@ -12,7 +12,6 @@ body{
 
 .container{
     width: 100vw;
-    height: 100vh;
 }
 
 h1{
@@ -77,6 +76,16 @@ a, a:visited{
 
 a:hover{
     color: #5eb5e0;
+}
+
+main{
+    width: 100vw;
+    padding: 5vw;
+}
+
+.ideaSection{
+    width: 60vw;
+    margin: auto;
 }
 
 footer{

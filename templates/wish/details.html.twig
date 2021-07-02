@@ -5,9 +5,13 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Affichage du titre du souhait</h2>
-    <div>
-        {# todo: afficher ici les diférent détails du souhait #}
-    </div>
+    <section class="ideaSection">
+        <h2>{{ wish.title }}</h2>
+        <div>
+            <p>{{ wish.description }}</p>
+            <h3>Ajouter par {{ wish.author }} le {{ wish.dateCreated|date('d-m-Y') }}</h3>
+        </div>
+    </section>
+
 {% endblock %}
 
