@@ -10,6 +10,7 @@
         <div>
             <p>{{ wish.description }}</p>
             <h3>Ajouter par {{ wish.author }} le {{ wish.dateCreated|date('d-m-Y') }}</h3>
+            <p>Catégorie : {{ wish.category.name }}</p>
         </div>
     </section>
 
