@@ -2,7 +2,19 @@
     <ul>
         <li><a href="{{ path('main_home') }}" title="home">Home</a></li>
         <li><a href="{{ path('wish_list') }}" title="liste">Liste</a></li>
-        <li><a href="{{ path('wish_create') }}" title="ajouter">Ajouter</a></li>
         <li><a href="{{ path('main_about') }}" title="about">About Us</a></li>
+        {% if app.user %}
+            <li><a href="{{ path('wish_create') }}" title="ajouter">Ajouter</a></li>
+            <li><a href="{{ path('app_logout') }}" title="Déconnexion">Déconnexion</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}" title="Connexion">Connexion</a></li>
+            <li><a href="{{ path('app_register') }}" title="Crée un compte">Crée un compte</a></li>
+        {% endif %}
+
+
+
     </ul>
+    {% if app.user %}
+        <p>Bonjour {{ app.user.pseudo }}</p>
+    {% endif %}
 </nav>
