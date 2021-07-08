@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\WishRepository;
+use App\services\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,23 +45,28 @@ class WishController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, Censurator $censurator): Response
     {
 
         $wish = new Wish();
         $wish->setDateCreated(new \DateTime());
         $wish->setIsPublished(true);
-        $wish->setAuthor($this->getUser()->getPseudo());
+        if ($this->getUser()){
+            $wish->setAuthor($this->getUser()->getPseudo());
+        }
         $wishForm = $this->createForm(WishType::class, $wish);
 
         $wishForm->handleRequest($request);
 
-        dump($wish);
+
+
         if ($wishForm->isSubmitted() && $wishForm->isValid()){
+            $censureText = $censurator->purify($wish->getDescription());
+            $wish->setDescription($censureText);
             $entityManager->persist($wish);
             $entityManager->flush();
 
-            dump($wish);
+
 
             $this->addFlash("success", "Idée enregistrée");
             return $this->redirectToRoute('wish_details', ['id'=>$wish->getId()]);
